@@ -1,3 +1,5 @@
+// routes/routes.ts
+
 import { Router } from 'express';
 import { getAllTodos, createTodo, updateTodo, deleteTodo } from '../controllers/controller';
 
