@@ -1,5 +1,6 @@
-import { Model, DataTypes } from 'sequelize';
-import sequelize from '../config/database';
+// models/todoModel.ts
+import { Model, DataTypes } from "sequelize";
+import sequelize from "../config/database";
 
 class Todo extends Model {
   public id!: number;
@@ -7,24 +8,27 @@ class Todo extends Model {
   public completed!: boolean;
 }
 
-Todo.init({
-  id: {
-    type: DataTypes.INTEGER.UNSIGNED,
-    autoIncrement: true,
-    primaryKey: true,
+Todo.init(
+  {
+    id: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    title: {
+      type: new DataTypes.STRING(128),
+      allowNull: false,
+    },
+    completed: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   },
-  title: {
-    type: new DataTypes.STRING(128),
-    allowNull: false,
-  },
-  completed: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false,
-  },
-}, {
-  tableName: 'todos',
-  sequelize,
-});
+  {
+    tableName: "todos",
+    sequelize,
+  }
+);
 
 export default Todo;
