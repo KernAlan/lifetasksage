@@ -1,15 +1,10 @@
+// config/database.ts
 import { Sequelize } from "sequelize";
+import { databaseConfig, Environment } from './databaseConfig';
 
-// Provide a fallback for DATABASE_URL in case it's undefined
-const databaseUrl = process.env.DATABASE_URL || '';
+const env = process.env.NODE_ENV as Environment || 'development';
+const { url, dialect, logging } = databaseConfig[env];
 
-const sequelize = new Sequelize(
-  process.env.NODE_ENV === 'test' ? 'sqlite::memory:' : databaseUrl,
-  {
-    dialect: process.env.NODE_ENV === 'test' ? 'sqlite' : 'postgres',
-    logging: false, // Optionally turn off logging for cleaner test output
-    // ... other configurations
-  }
-);
+const sequelize = new Sequelize(url, { dialect, logging });
 
 export default sequelize;
