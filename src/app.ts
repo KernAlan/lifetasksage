@@ -1,11 +1,14 @@
+// app.ts
 import express, { Express } from "express";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import morgan from "morgan";
 import todoRoutes from "./routes/todoRoutes";
+import { initializeDatabase } from "./config/initializeDatabase";
 
-export function createApp(): Express {
+export async function createApp(): Promise<Express> {
+  await initializeDatabase();
   const app = express();
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
