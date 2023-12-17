@@ -7,10 +7,7 @@ services:
       - "8000:8000"
     environment:
       - NODE_ENV=development
-    volumes:
-      - .:/usr/src/app
     command: npm run start
-    restart: on-failure
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 1m30s

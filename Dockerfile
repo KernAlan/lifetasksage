@@ -15,6 +15,7 @@ COPY . .
 
 # Build stage
 RUN npm run build
+RUN ls -la dist
 
 # Make port available to the world outside this container
 EXPOSE 8000
